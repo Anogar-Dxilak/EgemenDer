@@ -78,13 +78,13 @@ const EDUCATION = {
   activities: 'Başkan Yardımcılığı, ISTE Siber Kulübü (2023–2024)',
   focus: 'Offensive Cybersecurity, Ağ ve Sistem Savunması',
   certifications: [
-    'Cisco CyberOps Associate',
-    'CCNAv7',
-    'ISO 27001',
-    'Turkcell Pentesting',
-    'ICCW',
-    'Siber Güvenlik Uzmanlığı',
-    'English B1 Certificate'
+    { name: 'Cisco CyberOps Associate', link: 'https://www.credly.com/badges/9bc1d95b-efc4-4c74-957c-6d26580bd8ef/linked_in_profile' },
+    { name: 'CCNAv7', link: 'https://www.credly.com/badges/100976fb-b9a6-42bf-b0fe-6106e60fdf61/public_url' },
+    { name: 'ISO 27001', link: 'https://drive.google.com/file/d/1xpQm88qs5qgyZgCiyUNRNWcVlHOCuNjw/view' },
+    { name: 'Turkcell Pentesting', link: 'https://gelecegiyazanlar.turkcell.com.tr/sertifika/da9c44cb87984c91b39d1db287027924' },
+    { name: 'ICCW', link: 'https://drive.google.com/file/d/1yQY_RNAvsfKQtd15oHPQayZ9XMS4ajcf/view' },
+    { name: 'Siber Güvenlik Uzmanlığı', link: 'https://drive.google.com/file/d/19UEmqx23aW2g21TaiN-OlrBdHxoEhTvM/view' },
+    { name: 'English B1 Certificate', link: 'https://drive.google.com/file/d/1gP9dzQ_i_RrGtKkGiqAEtGs12b6tGZVk/view' }
   ]
 };
 
@@ -176,7 +176,7 @@ export default function App() {
           `  Club:           ${EDUCATION.activities}`,
           `  Core Focus:     ${EDUCATION.focus}`,
           '  Certifications:',
-          ...EDUCATION.certifications.map(cert => `    - ${cert}`)
+          ...EDUCATION.certifications.map(cert => `    - ${cert.name} (Verify: ${cert.link})`)
         ];
         break;
       case 'contact':
@@ -345,10 +345,13 @@ export default function App() {
                 <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">Certifications:</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-400">
                   {EDUCATION.certifications.map((cert, idx) => (
-                    <div key={idx} className="flex items-center space-x-2 bg-gray-950 border border-gray-900 px-3 py-2 rounded">
-                      <span className="text-[#00ff66] font-bold">✓</span>
-                      <span>{cert}</span>
-                    </div>
+                    <a key={idx} href={cert.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-gray-955 border border-gray-900 px-3 py-2 rounded hover:border-[#00ff66]/30 transition group">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[#00ff66] font-bold">✓</span>
+                        <span className="group-hover:text-white transition">{cert.name}</span>
+                      </div>
+                      <span className="text-[10px] text-gray-600 font-mono group-hover:text-[#00ff66] transition">Verify →</span>
+                    </a>
                   ))}
                 </div>
               </div>
