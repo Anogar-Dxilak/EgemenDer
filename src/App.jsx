@@ -111,15 +111,17 @@ export default function App() {
   // Terminal için state yapıları
   const [terminalInput, setTerminalInput] = useState('');
   const [terminalHistory, setTerminalHistory] = useState([
-    'Welcome to Egemen\'s CyberOS v1.0.0...',
-    'Type "help" to see available commands.',
-    ''
+    { text: "Welcome to Egemen's CyberOS v1.0.0...", type: 'system' },
+    { text: 'Type "help" to see available commands.', type: 'system' },
+    { text: '', type: 'system' }
   ]);
-  const terminalBottomRef = useRef(null);
+  const terminalBodyRef = useRef(null);
 
-  // Terminale yeni yazı geldikçe otomatik aşağı kaydır
+  // Terminale yeni yazı geldikçe sadece terminal kutusunu aşağı kaydır (tüm sayfayı değil!)
   useEffect(() => {
-    terminalBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
   }, [terminalHistory]);
 
   // Terminal Komut İşleyici
@@ -197,20 +199,24 @@ export default function App() {
         response = [`Command not found: "${cmd}". Type "help" for list of commands.`];
     }
 
-    setTerminalHistory(prev => [...prev, `guest@egemender:~$ ${terminalInput}`, ...response, '']);
+    setTerminalHistory(prev => [
+      ...prev,
+      { text: `guest@egemender:~$ ${terminalInput}`, type: 'input' },
+      ...response.map(line => ({ text: line, type: 'output' })),
+      { text: '', type: 'system' }
+    ]);
     setTerminalInput('');
   };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-gray-300 font-sans selection:bg-[#00ff66] selection:text-black">
       
-      {/* HEADER / HERO SECTION */}
-      <header className="border-b border-gray-900 bg-[#0f0f0f]/80 backdrop-blur sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center space-x-2">
+      <header className="border-b border-gray-900 bg-[#0f0f0f]/80 backdrop-blur sticky top-0 z-50 px-6 py-2.5 flex flex-col items-center gap-2">
+        <div className="flex items-center space-x-2 w-full justify-center">
           <span className="h-3 w-3 rounded-full bg-[#00ff66] animate-pulse"></span>
-          <h1 className="font-mono font-bold text-xl tracking-wider text-white">EGEMEN DER PORTFOLIO</h1>
+          <h1 className="font-mono font-bold text-xl tracking-wider text-white whitespace-nowrap">EGEMEN DER PORTFOLYO</h1>
         </div>
-        <nav className="hidden md:flex space-x-6 font-mono text-sm">
+        <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2 font-mono text-sm w-full">
           <a href="#about" className="hover:text-[#00ff66] transition">About</a>
           <a href="#skills" className="hover:text-[#00ff66] transition">Skills</a>
           <a href="#experience" className="hover:text-[#00ff66] transition">Experience</a>
@@ -227,7 +233,7 @@ export default function App() {
         <div className="lg:col-span-2 space-y-12">
           
           {/* ABOUT / INTRO SECTION */}
-          <section id="about" className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-6 space-y-6">
+          <section id="about" className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-6 space-y-6 scroll-mt-32">
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
               {/* Profil Resmi Alanı (Harika bir cyber-avatar tasarımı) */}
               <div className="relative group flex-shrink-0">
@@ -274,7 +280,7 @@ export default function App() {
           </section>
           
           {/* SKILLS */}
-          <section id="skills" className="space-y-6">
+          <section id="skills" className="space-y-6 scroll-mt-32">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Skills & Specializations</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {SKILL_CATEGORIES.map((cat, idx) => (
@@ -293,7 +299,7 @@ export default function App() {
           </section>
 
           {/* EXPERIENCE */}
-          <section id="experience" className="space-y-6">
+          <section id="experience" className="space-y-6 scroll-mt-32">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Professional History</h2>
             <div className="space-y-6">
               {EXPERIENCE.map((exp, index) => (
@@ -320,7 +326,7 @@ export default function App() {
           </section>
 
           {/* EDUCATION */}
-          <section id="education" className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-5">
+          <section id="education" className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-5 scroll-mt-32">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-950 pb-2">Education & Certifications</h2>
             
             <div className="space-y-4">
@@ -350,7 +356,7 @@ export default function App() {
           </section>
 
           {/* PROJECTS & PUBLICATIONS */}
-          <section id="projects" className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <section id="projects" className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-32">
             <div className="space-y-4">
               <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">System Automation</h2>
               {PROJECTS.map((proj, index) => (
@@ -379,7 +385,7 @@ export default function App() {
           </section>
 
           {/* REFERENCES */}
-          <section id="references" className="space-y-4">
+          <section id="references" className="space-y-4 scroll-mt-32">
             <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">References</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {REFERENCES.map((ref, idx) => (
@@ -400,7 +406,7 @@ export default function App() {
 
         {/* SAĞ ALAN: INTERACTIVE TERMINAL WIDGET (1 Kolon Kaplar) */}
         <div className="lg:col-span-1">
-          <div className="sticky top-24 border border-gray-900 rounded-lg overflow-hidden shadow-2xl bg-[#050505]">
+          <div className="sticky top-56 border border-gray-900 rounded-lg overflow-hidden shadow-2xl bg-[#050505]">
             {/* Terminal Top Bar */}
             <div className="bg-[#0f0f0f] px-4 py-2 flex items-center justify-between border-b border-gray-900">
               <div className="flex space-x-2">
@@ -412,22 +418,31 @@ export default function App() {
             </div>
 
             {/* Terminal Body */}
-            <div className="p-4 h-[450px] overflow-y-auto font-mono text-xs text-[#00ff66] space-y-2 flex flex-col">
+            <div ref={terminalBodyRef} className="p-4 h-[450px] overflow-y-auto font-mono text-xs space-y-2 flex flex-col text-left">
               <div className="flex-1">
-                {terminalHistory.map((line, index) => (
-                  <div key={index} className="whitespace-pre-wrap leading-relaxed">{line}</div>
-                ))}
-                <div ref={terminalBottomRef} />
+                {terminalHistory.map((line, index) => {
+                  let colorClass = 'text-[#00ff66]'; // varsayılan neon yeşil
+                  if (line.type === 'input') {
+                    colorClass = 'text-white font-bold'; // kullanıcının kendi yazdığı
+                  } else if (line.type === 'system') {
+                    colorClass = 'text-gray-400'; // sistem logları/boşluklar
+                  }
+                  return (
+                    <div key={index} className={`whitespace-pre-wrap leading-relaxed ${colorClass}`}>
+                      {line.text}
+                    </div>
+                  );
+                })}
               </div>
               
               {/* Terminal Input Form */}
-              <form onSubmit={handleCommand} className="flex items-center pt-2 border-t border-gray-900/50">
+              <form onSubmit={handleCommand} className="flex items-center pt-2 border-t border-gray-900/50 text-left">
                 <span className="text-[#00ff66] mr-2 select-none">guest@egemen:~$</span>
                 <input
                   type="text"
                   value={terminalInput}
                   onChange={(e) => setTerminalInput(e.target.value)}
-                  className="flex-1 bg-transparent border-none outline-none text-white font-mono p-0 focus:ring-0"
+                  className="flex-1 bg-transparent border-none outline-none text-white font-mono p-0 focus:ring-0 text-left"
                   autoFocus
                   placeholder="type help..."
                 />
