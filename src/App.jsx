@@ -75,7 +75,8 @@ const EDUCATION = {
   school: 'İskenderun Teknik Üniversitesi',
   degree: 'Bilgisayar Mühendisliği',
   date: '2020 - 2025',
-  activities: 'Başkan Yardımcılığı, ISTE Siber Kulübü (2023–2024)',
+  activities2: 'İletişim Sorumlusu, ISTE Siber Kulübü (2021–2023)',
+  activities: 'Başkan Yardımcılığı, ISTE Siber Kulübü (2023–2025)',
   focus: 'Offensive Cybersecurity, Ağ ve Sistem Savunması',
   certifications: [
     { name: 'Cisco CyberOps Associate', link: 'https://www.credly.com/badges/9bc1d95b-efc4-4c74-957c-6d26580bd8ef/linked_in_profile' },
@@ -353,6 +354,7 @@ export default function App() {
                   <p className="text-sm text-gray-400 font-mono mt-0.5">{EDUCATION.degree}</p>
                   <p className="text-xs text-gray-500 font-mono mt-1">🎯 Odak: {EDUCATION.focus}</p>
                   <p className="text-xs text-gray-500 font-mono mt-0.5">👥 {EDUCATION.activities}</p>
+                  <p className="text-xs text-gray-500 font-mono mt-0.5">👥 {EDUCATION.activities2}</p>
                 </div>
                 <span className="text-xs font-mono bg-gray-950 text-gray-400 px-2.5 py-1 rounded border border-gray-800 self-start">{EDUCATION.date}</span>
               </div>
