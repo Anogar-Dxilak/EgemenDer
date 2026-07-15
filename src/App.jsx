@@ -12,7 +12,7 @@ const ABOUT = {
     linkedin: 'https://linkedin.com/in/egemen-der',
     medium: 'https://medium.com/@egemender',
     military: 'Tamamlandı',
-    languages: 'English B1, Turkish Native'
+    languages: 'İngilizce B1, Türkçe (Anadil)'
   }
 };
 
@@ -46,7 +46,7 @@ const SKILL_CATEGORIES = [
 const EXPERIENCE = [
   {
     company: 'ION Bilgi Teknolojileri | Ankara',
-    role: 'SOC Stajyer',
+    role: 'SOC Stajyeri',
     date: '2025 - 2025',
     bullets: [
       'SOC operasyonları kapsamında Linux, Windows ve Windows Server platformlarında Wazuh SIEM entegrasyonunu başarıyla gerçekleştirdim.',
@@ -76,7 +76,7 @@ const EDUCATION = {
   degree: 'Bilgisayar Mühendisliği',
   date: '2020 - 2025',
   activities2: 'İletişim Sorumlusu, ISTE Siber Kulübü (2021–2023)',
-  activities: 'Başkan Yardımcılığı, ISTE Siber Kulübü (2023–2025)',
+  activities: 'Başkan Yardımcısı, ISTE Siber Kulübü (2023–2025)',
   focus: 'Offensive Cybersecurity, Ağ ve Sistem Savunması',
   certifications: [
     { name: 'Cisco CyberOps Associate', link: 'https://www.credly.com/badges/9bc1d95b-efc4-4c74-957c-6d26580bd8ef/linked_in_profile' },
@@ -152,35 +152,35 @@ export default function App() {
     switch (cmd) {
       case 'help':
         response = [
-          'Available commands:',
-          '  about       - Professional summary',
-          '  skills      - List cybersecurity & development skills',
-          '  experience  - View work experience details',
-          '  education   - Education history and certifications',
-          '  contact     - Contact links and information',
-          '  clear       - Clear terminal screen'
+          'Kullanılabilir komutlar:',
+          '  about       - Profesyonel özet',
+          '  skills      - Siber güvenlik & geliştirme yeteneklerini listele',
+          '  experience  - İş deneyimi detaylarını görüntüle',
+          '  education   - Eğitim geçmişi ve sertifikalar',
+          '  contact     - İletişim bağlantıları ve bilgileri',
+          '  clear       - Terminal ekranını temizle'
         ];
         break;
       case 'about':
         response = [
           'EGEMEN DER - Bilgisayar Mühendisi',
-          'Red Team & Offensive Security enthusiast with SOC background.',
+          'SOC geçmişine sahip Red Team & Offensive Security meraklısı.',
           '',
           ABOUT.intro
         ];
         break;
       case 'skills':
         response = [
-          'TECHNICAL SKILLS:',
+          'TEKNİK YETENEKLER:',
           ...SKILL_CATEGORIES.map(cat => `  [+] ${cat.name}: ${cat.skills.join(', ')}`)
         ];
         break;
       case 'experience':
         response = [
-          'WORK HISTORY:',
+          'İŞ GEÇMİŞİ:',
           ...EXPERIENCE.flatMap(exp => [
             `  * ${exp.company} (${exp.date})`,
-            `    Position: ${exp.role}`,
+            `    Pozisyon: ${exp.role}`,
             ...exp.bullets.map(b => `    - ${b}`),
             ''
           ])
@@ -188,25 +188,25 @@ export default function App() {
         break;
       case 'education':
         response = [
-          'EDUCATION:',
-          `  School:         ${EDUCATION.school}`,
-          `  Degree:         ${EDUCATION.degree} (${EDUCATION.date})`,
-          `  Club:           ${EDUCATION.activities}`,
-          `  Core Focus:     ${EDUCATION.focus}`,
-          '  Certifications:',
-          ...EDUCATION.certifications.map(cert => `    - ${cert.name} (Verify: ${cert.link})`)
+          'EĞİTİM:',
+          `  Okul:           ${EDUCATION.school}`,
+          `  Bölüm:          ${EDUCATION.degree} (${EDUCATION.date})`,
+          `  Kulüp:          ${EDUCATION.activities}`,
+          `  Ana Odak:       ${EDUCATION.focus}`,
+          '  Sertifikalar:',
+          ...EDUCATION.certifications.map(cert => `    - ${cert.name} (Doğrula: ${cert.link})`)
         ];
         break;
       case 'contact':
         response = [
-          'CONTACT INFO:',
-          `  Email:       ${ABOUT.contact.email}`,
-          `  Phone:       ${ABOUT.contact.phone}`,
-          `  Location:    ${ABOUT.contact.location}`,
+          'İLETİŞİM BİLGİLERİ:',
+          `  E-posta:     ${ABOUT.contact.email}`,
+          `  Telefon:     ${ABOUT.contact.phone}`,
+          `  Konum:       ${ABOUT.contact.location}`,
           `  LinkedIn:    ${ABOUT.contact.linkedin}`,
           `  Medium:      ${ABOUT.contact.medium}`,
-          `  Military:    ${ABOUT.contact.military}`,
-          `  Languages:   ${ABOUT.contact.languages}`
+          `  Askerlik:    ${ABOUT.contact.military}`,
+          `  Diller:      ${ABOUT.contact.languages}`
         ];
         break;
       case 'clear':
@@ -214,7 +214,7 @@ export default function App() {
         setTerminalInput('');
         return;
       default:
-        response = [`Command not found: "${cmd}". Type "help" for list of commands.`];
+        response = [`Komut bulunamadı: "${cmd}". Komut listesi için "help" yazın.`];
     }
 
     setTerminalHistory(prev => [
@@ -235,12 +235,12 @@ export default function App() {
           <h1 className="font-mono font-bold text-base sm:text-xl tracking-wider text-white">EGEMEN DER PORTFOLYO</h1>
         </div>
         <nav className="flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1.5 sm:gap-y-2 font-mono text-[11px] sm:text-sm w-full">
-          <a href="#about" className="hover:text-[#00ff66] transition">About</a>
-          <a href="#skills" className="hover:text-[#00ff66] transition">Skills</a>
-          <a href="#experience" className="hover:text-[#00ff66] transition">Experience</a>
-          <a href="#education" className="hover:text-[#00ff66] transition">Education</a>
-          <a href="#projects" className="hover:text-[#00ff66] transition">Projects</a>
-          <a href="#references" className="hover:text-[#00ff66] transition">References</a>
+          <a href="#about" className="text-gray-300 hover:text-[#00ff66] transition">Hakkımda</a>
+          <a href="#skills" className="text-gray-300 hover:text-[#00ff66] transition">Yetenekler</a>
+          <a href="#experience" className="text-gray-300 hover:text-[#00ff66] transition">Deneyim</a>
+          <a href="#education" className="text-gray-300 hover:text-[#00ff66] transition">Eğitim</a>
+          <a href="#projects" className="text-gray-300 hover:text-[#00ff66] transition">Projeler</a>
+          <a href="#references" className="text-gray-300 hover:text-[#00ff66] transition">Referanslar</a>
         </nav>
       </header>
 
@@ -299,7 +299,7 @@ export default function App() {
           
           {/* SKILLS */}
           <section id="skills" className="space-y-6 scroll-mt-32">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Skills & Specializations</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Yetenekler & Uzmanlıklar</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {SKILL_CATEGORIES.map((cat, idx) => (
                 <div key={idx} className="bg-[#0f0f0f]/40 border border-gray-900 rounded p-4 space-y-3">
@@ -318,7 +318,7 @@ export default function App() {
 
           {/* EXPERIENCE */}
           <section id="experience" className="space-y-6 scroll-mt-32">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Professional History</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Mesleki Geçmiş</h2>
             <div className="space-y-6">
               {EXPERIENCE.map((exp, index) => (
                 <div key={index} className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-4 hover:border-gray-800 transition">
@@ -345,7 +345,7 @@ export default function App() {
 
           {/* EDUCATION */}
           <section id="education" className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-5 scroll-mt-32">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-950 pb-2">Education & Certifications</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-955 pb-2">Eğitim & Sertifikalar</h2>
             
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
@@ -361,15 +361,15 @@ export default function App() {
 
               {/* Sertifikalar Grid */}
               <div className="pt-4 border-t border-gray-950 space-y-2">
-                <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">Certifications:</h4>
+                <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">Sertifikalar:</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-400">
                   {EDUCATION.certifications.map((cert, idx) => (
-                    <a key={idx} href={cert.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-gray-955 border border-gray-900 px-3 py-2 rounded hover:border-[#00ff66]/30 transition group">
+                    <a key={idx} href={cert.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-gray-955 border border-gray-900 px-3 py-2 rounded hover:border-[#00ff66]/30 transition group text-gray-400">
                       <div className="flex items-center space-x-2">
                         <span className="text-[#00ff66] font-bold">✓</span>
-                        <span className="group-hover:text-white transition">{cert.name}</span>
+                        <span className="text-gray-400 group-hover:text-white transition">{cert.name}</span>
                       </div>
-                      <span className="text-[10px] text-gray-600 font-mono group-hover:text-[#00ff66] transition">Verify →</span>
+                      <span className="text-[10px] text-gray-600 font-mono group-hover:text-[#00ff66] transition">Doğrula →</span>
                     </a>
                   ))}
                 </div>
@@ -379,7 +379,7 @@ export default function App() {
 
           <section id="projects" className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-32">
             <div className="space-y-4">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Projects</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Projeler</h2>
               {PROJECTS.map((proj, index) => {
                 const cardClass = "block bg-[#0f0f0f] border border-gray-900 rounded p-5 flex flex-col justify-between hover:border-[#00ff66]/40 transition group";
                 const inner = (
@@ -401,7 +401,7 @@ export default function App() {
             </div>
 
             <div id="articles" className="space-y-4">
-              <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Vulnerability Research</h2>
+              <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Zafiyet Araştırmaları</h2>
               <div className="space-y-4">
                 {ARTICLES.map((art, index) => (
                   <a key={index} href={ABOUT.contact.medium} target="_blank" rel="noopener noreferrer" className="block bg-[#0f0f0f] border border-gray-900 rounded p-4 hover:border-[#00ff66]/30 transition group">
@@ -416,7 +416,7 @@ export default function App() {
 
           {/* REFERENCES */}
           <section id="references" className="space-y-4 scroll-mt-32">
-            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">References</h2>
+            <h2 className="text-sm font-mono uppercase tracking-widest text-[#00ff66] border-b border-gray-900 pb-2">Referanslar</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {REFERENCES.map((ref, idx) => (
                 <div key={idx} className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-3">
@@ -425,8 +425,8 @@ export default function App() {
                     <p className="text-xs text-gray-500 font-mono">{ref.company} / {ref.role}</p>
                   </div>
                   <div className="space-y-1 text-xs font-mono text-gray-400 pt-2 border-t border-gray-955">
-                    <div>📱 Phone: {ref.phone}</div>
-                    <div>📧 Email: <a href={`mailto:${ref.email}`} className="hover:text-[#00ff66] transition">{ref.email}</a></div>
+                    <div>📱 Telefon: <a href={`tel:${ref.phone}`} className="text-gray-400 hover:text-[#00ff66] transition">{ref.phone}</a></div>
+                    <div>📧 E-posta: <a href={`mailto:${ref.email}`} className="text-gray-400 hover:text-[#00ff66] transition">{ref.email}</a></div>
                   </div>
                 </div>
               ))}
@@ -474,7 +474,7 @@ export default function App() {
                   onChange={(e) => setTerminalInput(e.target.value)}
                   className="flex-1 bg-transparent border-none outline-none text-white font-mono p-0 focus:ring-0 text-left"
                   autoFocus
-                  placeholder="type help..."
+                  placeholder="help yazın..."
                 />
               </form>
             </div>
@@ -484,7 +484,7 @@ export default function App() {
       </main>
 
       <footer className="border-t border-gray-900 mt-24 py-8 text-center text-xs font-mono text-gray-600">
-        &copy; {new Date().getFullYear()} Egemen Der. All rights reserved. Secure connection guaranteed.
+        &copy; {new Date().getFullYear()} Egemen Der. Tüm hakları saklıdır. Güvenli bağlantı garantilenmiştir.
       </footer>
     </div>
   );
