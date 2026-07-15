@@ -79,6 +79,7 @@ const EDUCATION = {
   activities: 'Başkan Yardımcısı, ISTE Siber Kulübü (2023–2025)',
   focus: 'Offensive Cybersecurity, Ağ ve Sistem Savunması',
   certifications: [
+    { name: 'Certified Cybersecurity Foundations', link: 'https://hackviser.com/verify?id=HV-CORE-TFEQPOJ3' },
     { name: 'Cisco CyberOps Associate', link: 'https://www.credly.com/badges/9bc1d95b-efc4-4c74-957c-6d26580bd8ef/linked_in_profile' },
     { name: 'CCNAv7', link: 'https://www.credly.com/badges/100976fb-b9a6-42bf-b0fe-6106e60fdf61/public_url' },
     { name: 'ISO 27001', link: 'https://drive.google.com/file/d/1xpQm88qs5qgyZgCiyUNRNWcVlHOCuNjw/view' },
@@ -256,8 +257,8 @@ export default function App() {
               {/* Profil Resmi Alanı (Harika bir cyber-avatar tasarımı) */}
               <div className="relative group flex-shrink-0">
                 <div className="absolute -inset-0.5 bg-[#00ff66] rounded-full blur opacity-25 group-hover:opacity-60 transition duration-1000"></div>
-                <div className="relative w-24 h-24 rounded-full bg-gray-955 border border-gray-800 flex items-center justify-center text-3xl font-mono text-[#00ff66] overflow-hidden">
-                  ED
+                <div className="relative w-24 h-24 rounded-full bg-gray-955 border border-gray-800 flex items-center justify-center overflow-hidden">
+                  <img src="/egemender.jpg" alt="Egemen Der" className="w-full h-full object-cover" />
                 </div>
               </div>
               
