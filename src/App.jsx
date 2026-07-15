@@ -258,7 +258,7 @@ export default function App() {
               <div className="relative group flex-shrink-0">
                 <div className="absolute -inset-0.5 bg-[#00ff66] rounded-full blur opacity-25 group-hover:opacity-60 transition duration-1000"></div>
                 <div className="relative w-24 h-24 rounded-full bg-gray-955 border border-gray-800 flex items-center justify-center overflow-hidden">
-                  <img src="/egemender.jpg" alt="Egemen Der" className="w-full h-full object-cover" />
+                  <img src="/profile.jpg" alt="Egemen Der" className="w-full h-full object-cover" />
                 </div>
               </div>
               
