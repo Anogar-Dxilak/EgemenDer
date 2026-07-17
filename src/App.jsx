@@ -127,9 +127,712 @@ const REFERENCES = [
   }
 ];
 
+// Home dizini yolu
+const HOME_DIR = '/home/egemen';
+
+// Sanal Dosya Sistemi (Mock Filesystem) - Gerçekçi Linux yapısı
+const VIRTUAL_FS = {
+  type: 'dir',
+  permissions: 'drwxr-xr-x',
+  links: 3,
+  owner: 'root',
+  group: 'root',
+  size: 4096,
+  date: 'Jul 10 09:00',
+  children: {
+    'home': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 3,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      children: {
+        'egemen': {
+          type: 'dir',
+          permissions: 'drwxr-xr-x',
+          links: 14,
+          owner: 'egemen',
+          group: 'egemen',
+          size: 4096,
+          date: 'Jul 17 17:48',
+          children: {
+            '.bashrc': {
+              type: 'file',
+              permissions: '-rw-r--r--',
+              links: 1,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 3771,
+              date: 'Jul 10 09:00',
+              content: '# ~/.bashrc: executed by bash(1) for non-login shells.\n\n# If not running interactively, don\'t do anything\ncase $- in\n    *i*) ;;\n      *) return;;\nesac\n\n# History settings\nHISTSIZE=1000\nHISTFILESIZE=2000\n\n# Prompt\nPS1=\'\\[\\033[01;32m\\]guest@egemen\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]\\$ \'\n\n# Aliases\nalias ll=\'ls -alF\'\nalias la=\'ls -A\'\nalias l=\'ls -CF\'\nalias nmap-quick=\'nmap -sV -sC -O\'\nalias msfconsole=\'cd /opt/metasploit && ./msfconsole\'\n\nexport PATH=$PATH:/opt/metasploit:/opt/burpsuite'
+            },
+            '.bash_history': {
+              type: 'file',
+              permissions: '-rw-------',
+              links: 1,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 892,
+              date: 'Jul 17 16:30',
+              content: 'nmap -sV -sC 192.168.1.0/24\nsudo wazuh-manager status\ncat /var/log/auth.log | grep "Failed password"\nmsfconsole\nsearchsploit apache 2.4\nsudo tcpdump -i eth0 -w capture.pcap\nwireshark capture.pcap\nsudo systemctl restart splunk\ncurl -k https://target.local/login\nsqlmap -u "http://target.local/page?id=1" --dbs\nnmap -sS -p- 10.10.10.5\nhydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.50\njohn --wordlist=/usr/share/wordlists/rockyou.txt hash.txt\nhashcat -m 0 hash.txt /usr/share/wordlists/rockyou.txt\ngobuster dir -u http://target.local -w /usr/share/wordlists/dirb/common.txt'
+            },
+            '.ssh': {
+              type: 'dir',
+              permissions: 'drwx------',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 15 11:20',
+              children: {
+                'id_rsa.pub': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 570,
+                  date: 'Jul 15 11:20',
+                  content: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7... (truncated for security) guest@egemen'
+                },
+                'known_hosts': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 1244,
+                  date: 'Jul 17 10:05',
+                  content: '192.168.1.1 ecdsa-sha2-nistp256 AAAAE2VjZH...\n10.10.10.5 ssh-rsa AAAAB3NzaC1yc2EAAAA...\ngithub.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5...'
+                }
+              }
+            },
+            'Desktop': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 17 14:30',
+              children: {
+                'quick_scan.sh': {
+                  type: 'file',
+                  permissions: '-rwxr-xr-x',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 485,
+                  date: 'Jul 16 22:10',
+                  content: '#!/bin/bash\n# Quick Network Reconnaissance Script\n# Author: Egemen Der\n\necho "[*] Starting Quick Scan..."\necho "[*] Target: $1"\n\necho "\\n[+] Port Scan:"\nnmap -sV -sC -T4 $1\n\necho "\\n[+] Directory Brute Force:"\ngobuster dir -u http://$1 -w /usr/share/wordlists/dirb/common.txt -q\n\necho "\\n[+] Nikto Scan:"\nnikto -h $1\n\necho "\\n[*] Scan Complete!"'
+                },
+                'notes.txt': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 312,
+                  date: 'Jul 17 14:30',
+                  content: '=== TODO ===\n- [ ] HTB: Devvortex makinesini bitir\n- [ ] Medium makale: SSTI yaz\n- [ ] Wazuh custom rule yaz (SQL injection detection)\n- [ ] pfSense VPN konfigürasyonu tamamla\n- [x] ION staj raporu gönder\n- [x] Cisco CyberOps sınavına gir'
+                },
+                'secret_flag.txt': {
+                  type: 'file',
+                  permissions: '-r--------',
+                  links: 1,
+                  owner: 'root',
+                  group: 'root',
+                  size: 48,
+                  date: 'Jan  1 00:00',
+                  content: '🏴 FLAG{cYbEr_sEcUrItY_nInJa_2026}\n\nTebrikler! Gizli bayrağı buldun. 🎉'
+                }
+              }
+            },
+            'Documents': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 4,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 17 12:00',
+              children: {
+                'reports': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 2,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 15 09:30',
+                  children: {
+                    'ion_staj_raporu.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 2048,
+                      date: 'Jul 15 09:30',
+                      content: `# ION Bilgi Teknolojileri - Staj Raporu\n\n${EXPERIENCE[0].company} (${EXPERIENCE[0].date})\nRol: ${EXPERIENCE[0].role}\n\n## Yapılan Çalışmalar:\n${EXPERIENCE[0].bullets.map(b => `- ${b}`).join('\n')}`
+                    },
+                    'bgtek_staj_raporu.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 2560,
+                      date: 'Jun 20 14:00',
+                      content: `# BgTek Siber Güvenlik - Staj Raporu\n\n${EXPERIENCE[1].company} (${EXPERIENCE[1].date})\nRol: ${EXPERIENCE[1].role}\n\n## Yapılan Çalışmalar:\n${EXPERIENCE[1].bullets.map(b => `- ${b}`).join('\n')}`
+                    },
+                    'pentest_diwa_report.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 1890,
+                      date: 'May 28 16:45',
+                      content: '# DIWA Penetration Test Report\n\n## Executive Summary\nDuring penetration testing of the DIWA system, a critical SQL injection\nvulnerability was discovered in the admin authentication mechanism.\n\n## Findings\n\n### CRITICAL - Admin NoPass SQL Injection\n- Severity: Critical (CVSS 9.8)\n- Location: /admin/login.php\n- Parameter: username\n- Payload: \' OR 1=1 --\n- Impact: Full admin access without credentials\n\n### Remediation\n- Implement parameterized queries\n- Input validation and sanitization\n- WAF rule implementation'
+                    }
+                  }
+                },
+                'certifications': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 2,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 10 11:00',
+                  children: {
+                    'sertifikalar.txt': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 980,
+                      date: 'Jul 10 11:00',
+                      content: `Sertifikalar ve Doğrulama Linkleri:\n${EDUCATION.certifications.map(c => `✓ ${c.name}\n  └─ ${c.link}`).join('\n\n')}`
+                    }
+                  }
+                },
+                'cv_egemen_der.md': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 3200,
+                  date: 'Jul 17 12:00',
+                  content: `# EGEMEN DER - CV\n\n## Kişisel Bilgiler\nE-posta:  ${ABOUT.contact.email}\nTelefon:  ${ABOUT.contact.phone}\nKonum:    ${ABOUT.contact.location}\nLinkedIn: ${ABOUT.contact.linkedin}\nMedium:   ${ABOUT.contact.medium}\nAskerlik: ${ABOUT.contact.military}\nDiller:   ${ABOUT.contact.languages}\n\n## Hakkımda\n${ABOUT.intro}\n\n## Eğitim\n${EDUCATION.school} - ${EDUCATION.degree} (${EDUCATION.date})\nOdak: ${EDUCATION.focus}\n${EDUCATION.activities}\n${EDUCATION.activities2}`
+                }
+              }
+            },
+            'Downloads': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 17 09:15',
+              children: {
+                'rockyou.txt': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 139921497,
+                  date: 'Mar 12 08:00',
+                  content: '(!) Bu dosya çok büyük. İlk 10 satır gösteriliyor:\n\n123456\npassword\n12345678\nqwerty\n123456789\n12345\n1234\n111111\n1234567\ndragon'
+                },
+                'linpeas.sh': {
+                  type: 'file',
+                  permissions: '-rwxr-xr-x',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 827340,
+                  date: 'Jul 05 20:30',
+                  content: '#!/bin/bash\n# linPEAS - Linux Privilege Escalation Awesome Script\n# Version: 4.0\n# Author: carlospolop\n# https://github.com/carlospolop/PEASS-ng\n\n# (Truncated - Full script available at GitHub)'
+                },
+                'nmap_cheatsheet.pdf': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 245760,
+                  date: 'Jun 18 13:20',
+                  content: '[PDF Dosyası - Nmap Cheat Sheet]\n\nTemel Tarama:\n  nmap -sV <target>          # Versiyon tespiti\n  nmap -sC <target>          # Script taraması\n  nmap -O <target>           # OS tespiti\n  nmap -A <target>           # Agresif tarama\n  nmap -sS -p- <target>      # Tüm portlar SYN\n  nmap -sU <target>          # UDP tarama\n\nNSE Scriptleri:\n  nmap --script vuln <target>\n  nmap --script=http-enum <target>\n  nmap --script=smb-vuln* <target>'
+                }
+              }
+            },
+            'Music': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul  8 19:00',
+              children: {
+                'hacking_playlist.m3u': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 256,
+                  date: 'Jul  8 19:00',
+                  content: '#EXTM3U\n#EXTINF:240, Darknet Diaries - EP 131\n#EXTINF:180, Cyberpunk 2077 OST - Rebel Path\n#EXTINF:210, The Algorithm - Floating Point\n#EXTINF:195, Perturbator - Dangerous Days\n#EXTINF:230, Carpenter Brut - Turbo Killer'
+                }
+              }
+            },
+            'Pictures': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 12 15:00',
+              children: {
+                'screenshots': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 2,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 12 15:00',
+                  children: {
+                    'wazuh_dashboard.png': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 524288,
+                      date: 'Jul 12 15:00',
+                      content: '[PNG Dosyası - Wazuh SIEM Dashboard Screenshot]\nResim boyutu: 1920x1080\nWazuh Manager v4.7 - Security Events Overview'
+                    },
+                    'htb_pwned.png': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 348160,
+                      date: 'Jul  8 23:45',
+                      content: '[PNG Dosyası - HackTheBox Machine Pwned]\nResim boyutu: 1920x1080\n🏆 Machine: Devvortex | Difficulty: Easy | Status: PWNED!'
+                    }
+                  }
+                }
+              }
+            },
+            'Public': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 10 09:00',
+              children: {}
+            },
+            'Templates': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 10 09:00',
+              children: {}
+            },
+            'Videos': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 10 09:00',
+              children: {}
+            },
+            'projects': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 16 10:00',
+              children: {
+                'sefer_otomasyon': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 3,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 14 18:00',
+                  children: {
+                    'README.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 420,
+                      date: 'Jul 14 18:00',
+                      content: `# ${PROJECTS[0].title}\n\nTeknolojiler: ${PROJECTS[0].tech}\n\n## Açıklama\n${PROJECTS[0].desc}\n\n## GitHub\n${PROJECTS[0].link}`
+                    }
+                  }
+                },
+                'cv_olusturma': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 3,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 12 11:00',
+                  children: {
+                    'README.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 380,
+                      date: 'Jul 12 11:00',
+                      content: `# ${PROJECTS[1].title}\n\nTeknolojiler: ${PROJECTS[1].tech}\n\n## Açıklama\n${PROJECTS[1].desc}\n\n## GitHub\n${PROJECTS[1].link}`
+                    }
+                  }
+                },
+                'tir_otomasyonu': {
+                  type: 'dir',
+                  permissions: 'drwxr-xr-x',
+                  links: 3,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 4096,
+                  date: 'Jul 10 16:30',
+                  children: {
+                    'README.md': {
+                      type: 'file',
+                      permissions: '-rw-r--r--',
+                      links: 1,
+                      owner: 'egemen',
+                      group: 'egemen',
+                      size: 400,
+                      date: 'Jul 10 16:30',
+                      content: `# ${PROJECTS[2].title}\n\nTeknolojiler: ${PROJECTS[2].tech}\n\n## Açıklama\n${PROJECTS[2].desc}\n\n## GitHub\n${PROJECTS[2].link}`
+                    }
+                  }
+                }
+              }
+            },
+            'tools': {
+              type: 'dir',
+              permissions: 'drwxr-xr-x',
+              links: 2,
+              owner: 'egemen',
+              group: 'egemen',
+              size: 4096,
+              date: 'Jul 16 21:00',
+              children: {
+                'recon.sh': {
+                  type: 'file',
+                  permissions: '-rwxr-xr-x',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 720,
+                  date: 'Jul 16 21:00',
+                  content: '#!/bin/bash\n# Automated Reconnaissance Script\n# Author: Egemen Der\n\nif [ -z "$1" ]; then\n  echo "Usage: ./recon.sh <target>"\n  exit 1\nfi\n\nTARGET=$1\nOUTDIR="./recon_$TARGET"\nmkdir -p $OUTDIR\n\necho "[*] Starting recon on $TARGET"\necho "[+] Subdomain enumeration..."\nsubfinder -d $TARGET -o $OUTDIR/subdomains.txt\n\necho "[+] Port scanning..."\nnmap -sV -sC -oN $OUTDIR/nmap.txt $TARGET\n\necho "[+] Directory brute-force..."\ngobuster dir -u http://$TARGET -w /usr/share/wordlists/dirb/common.txt -o $OUTDIR/dirs.txt\n\necho "[*] Results saved to $OUTDIR/"'
+                },
+                'wazuh_rules.xml': {
+                  type: 'file',
+                  permissions: '-rw-r--r--',
+                  links: 1,
+                  owner: 'egemen',
+                  group: 'egemen',
+                  size: 1580,
+                  date: 'Jul 14 08:30',
+                  content: '<!-- Custom Wazuh Rules by Egemen Der -->\n<group name="custom_sql_injection">\n  <rule id="100100" level="12">\n    <if_group>web|accesslog</if_group>\n    <regex>SELECT.*FROM|UNION.*SELECT|OR\\s+1=1|DROP\\s+TABLE</regex>\n    <description>SQL Injection attempt detected</description>\n    <mitre>\n      <id>T1190</id>\n    </mitre>\n  </rule>\n\n  <rule id="100101" level="10">\n    <if_group>web|accesslog</if_group>\n    <regex>\\.\\.%2f|\\.\\.\\\\|%00|/etc/passwd</regex>\n    <description>Path traversal attempt detected</description>\n    <mitre>\n      <id>T1083</id>\n    </mitre>\n  </rule>\n</group>'
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    'etc': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      children: {
+        'hostname': {
+          type: 'file',
+          permissions: '-rw-r--r--',
+          links: 1,
+          owner: 'root',
+          group: 'root',
+          size: 8,
+          date: 'Jul 10 09:00',
+          content: 'egemen'
+        },
+        'os-release': {
+          type: 'file',
+          permissions: '-rw-r--r--',
+          links: 1,
+          owner: 'root',
+          group: 'root',
+          size: 310,
+          date: 'Jul 10 09:00',
+          content: 'NAME="CyberOS"\nVERSION="1.0.0 (Red Team Edition)"\nID=cyberos\nPRETTY_NAME="CyberOS 1.0.0 Red Team Edition"\nHOME_URL="https://egemender.dev"\nSUPPORT_URL="https://linkedin.com/in/egemen-der"'
+        },
+        'passwd': {
+          type: 'file',
+          permissions: '-rw-r--r--',
+          links: 1,
+          owner: 'root',
+          group: 'root',
+          size: 180,
+          date: 'Jul 10 09:00',
+          content: 'root:x:0:0:root:/root:/bin/bash\negemen:x:1000:1000:Egemen Der:/home/egemen:/bin/bash\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin'
+        }
+      }
+    },
+    'var': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      children: {
+        'log': {
+          type: 'dir',
+          permissions: 'drwxr-xr-x',
+          links: 2,
+          owner: 'root',
+          group: 'root',
+          size: 4096,
+          date: 'Jul 17 17:48',
+          children: {
+            'auth.log': {
+              type: 'file',
+              permissions: '-rw-r-----',
+              links: 1,
+              owner: 'root',
+              group: 'adm',
+              size: 4820,
+              date: 'Jul 17 17:48',
+              content: 'Jul 17 17:30:01 redteam sshd[4521]: Failed password for root from 185.220.101.34 port 42871 ssh2\nJul 17 17:30:03 redteam sshd[4521]: Failed password for root from 185.220.101.34 port 42871 ssh2\nJul 17 17:30:05 redteam sshd[4523]: Accepted publickey for egemen from 192.168.1.10 port 52340 ssh2\nJul 17 17:31:22 redteam sudo: egemen : TTY=pts/0 ; PWD=/home/egemen ; USER=root ; COMMAND=/usr/bin/apt update\nJul 17 17:45:10 redteam sshd[4890]: Failed password for invalid user admin from 103.45.67.89 port 38291 ssh2\nJul 17 17:45:12 redteam sshd[4891]: Failed password for invalid user test from 103.45.67.89 port 38295 ssh2\nJul 17 17:48:00 redteam CRON[5012]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)'
+            }
+          }
+        }
+      }
+    },
+    'bin': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: true,
+      children: {}
+    },
+    'boot': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: true,
+      children: {}
+    },
+    'root': {
+      type: 'dir',
+      permissions: 'drwx------',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: true,
+      children: {}
+    },
+    'usr': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: true,
+      children: {}
+    },
+    'obt': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: false,
+      children: {
+        'readme.txt': {
+          type: 'file',
+          permissions: '-rw-r--r--',
+          links: 1,
+          owner: 'guest',
+          group: 'staff',
+          size: 140,
+          date: 'Jul 10 09:00',
+          content: 'Erişilebilir opsiyonel modüller ve yazılımlar dizini (obt).'
+        }
+      }
+    },
+    'opt': {
+      type: 'dir',
+      permissions: 'drwxr-xr-x',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 10 09:00',
+      restricted: false,
+      children: {
+        'readme.txt': {
+          type: 'file',
+          permissions: '-rw-r--r--',
+          links: 1,
+          owner: 'guest',
+          group: 'staff',
+          size: 140,
+          date: 'Jul 10 09:00',
+          content: 'Erişilebilir opsiyonel modüller ve yazılımlar dizini (opt).'
+        }
+      }
+    },
+    'tmp': {
+      type: 'dir',
+      permissions: 'drwxrwxrwt',
+      links: 2,
+      owner: 'root',
+      group: 'root',
+      size: 4096,
+      date: 'Jul 17 17:48',
+      restricted: false,
+      children: {}
+    }
+  }
+};
+
+// Dosya Sistemi Konum Bulma Yardımcısı (Paths & Traversing)
+const getFsItem = (path, currentPath) => {
+  let targetPath = (path !== undefined && path !== null) ? path.trim() : '.';
+  if (targetPath === '') targetPath = '.';
+
+  // Home dizini sembolünü (~) /home/egemen'e çevir
+  if (targetPath.startsWith('~')) {
+    targetPath = targetPath.replace('~', HOME_DIR);
+    if (targetPath === '') targetPath = HOME_DIR;
+  }
+
+  // Mutlak (Absolute) ve Göreli (Relative) yolların çözümlenmesi
+  let absoluteParts = [];
+  if (targetPath.startsWith('/')) {
+    absoluteParts = targetPath.split('/');
+  } else {
+    const currentParts = currentPath.split('/').filter(Boolean);
+    const relativeParts = targetPath.split('/');
+    absoluteParts = ['', ...currentParts, ...relativeParts];
+  }
+
+  // Nokta (.) ve çift nokta (..) dizinlerini çöz
+  const resolvedParts = [];
+  for (const part of absoluteParts) {
+    if (part === '' || part === '.') {
+      continue;
+    }
+    if (part === '..') {
+      resolvedParts.pop();
+      continue;
+    }
+    resolvedParts.push(part);
+  }
+
+  const resolvedPath = '/' + resolvedParts.join('/');
+
+  // VIRTUAL_FS ağacında arama yap (büyük/küçük harf duyarsız eşleşme desteği)
+  let currentNode = VIRTUAL_FS;
+  const actualResolvedParts = [];
+  for (const part of resolvedParts) {
+    if (currentNode && currentNode.type === 'dir' && currentNode.children) {
+      // 1. Önce tam harf eşleşmesini kontrol et
+      let matchKey = Object.keys(currentNode.children).find(key => key === part);
+      // 2. Bulunamadıysa büyük/küçük harf duyarsız arama yap
+      if (!matchKey) {
+        matchKey = Object.keys(currentNode.children).find(key => key.toLowerCase() === part.toLowerCase());
+      }
+      if (matchKey) {
+        currentNode = currentNode.children[matchKey];
+        actualResolvedParts.push(matchKey);
+      } else {
+        return { node: null, resolvedPath: '/' + resolvedParts.join('/') };
+      }
+    } else {
+      return { node: null, resolvedPath: '/' + resolvedParts.join('/') };
+    }
+  }
+  return { node: currentNode, resolvedPath: '/' + actualResolvedParts.join('/') };
+};
+
+// Linkleri (URL) saptayıp tıklanabilir kılan fonksiyon
+const renderTerminalText = (text) => {
+  const urlRegex = /(https?:\/\/[^\s\)]+)/g;
+  const parts = text.split(urlRegex);
+  if (parts.length === 1) return text;
+  
+  return parts.map((part, index) => {
+    if (urlRegex.test(part)) {
+      return (
+        <a key={index} href={part} target="_blank" rel="noopener noreferrer" className="text-[#00ff66] underline hover:text-[#00ff66]/80 break-all">
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+};
+
 export default function App() {
   // Terminal için state yapıları
   const [terminalInput, setTerminalInput] = useState('');
+  const [currentPath, setCurrentPath] = useState(HOME_DIR);
   const [terminalHistory, setTerminalHistory] = useState([
     { text: "Welcome to Egemen's CyberOS v1.0.0...", type: 'system' },
     { text: 'Type "help" to see available commands.', type: 'system' },
@@ -147,85 +850,332 @@ export default function App() {
   // Terminal Komut İşleyici
   const handleCommand = (e) => {
     e.preventDefault();
-    const cmd = terminalInput.trim().toLowerCase();
-    if (!cmd) return;
+    const inputClean = terminalInput.trim();
+    if (!inputClean) return;
+
+    const parts = inputClean.split(/\s+/);
+    const baseCmd = parts[0].toLowerCase();
+    const args = parts.slice(1);
 
     let response = [];
-    switch (cmd) {
+    switch (baseCmd) {
       case 'help':
         response = [
-          'Kullanılabilir komutlar:',
-          '  about       - Profesyonel özet',
-          '  skills      - Siber güvenlik & geliştirme yeteneklerini listele',
-          '  experience  - İş deneyimi detaylarını görüntüle',
-          '  education   - Eğitim geçmişi ve sertifikalar',
-          '  contact     - İletişim bağlantıları ve bilgileri',
-          '  clear       - Terminal ekranını temizle'
+          { text: 'Kullanılabilir komutlar:', type: 'output' },
+          { text: '  about       - Profesyonel özet', type: 'output' },
+          { text: '  skills      - Siber güvenlik & geliştirme yeteneklerini listele', type: 'output' },
+          { text: '  experience  - İş deneyimi detaylarını görüntüle', type: 'output' },
+          { text: '  education   - Eğitim geçmişi ve sertifikalar', type: 'output' },
+          { text: '  contact     - İletişim bağlantıları ve bilgileri', type: 'output' },
+          { text: '  ls          - Dosya ve dizinleri listele', type: 'output' },
+          { text: '  cd [dizin]  - Dizini değiştir (Örn: cd Documents, cd ..)', type: 'output' },
+          { text: '  cat [dosya] - Dosya içeriğini oku (Örn: cat Desktop/notes.txt)', type: 'output' },
+          { text: '  pwd         - Aktif dizin yolunu göster', type: 'output' },
+          { text: '  clear       - Terminal ekranını temizle', type: 'output' }
         ];
         break;
       case 'about':
         response = [
-          'EGEMEN DER - Bilgisayar Mühendisi',
-          'SOC geçmişine sahip Red Team & Offensive Security meraklısı.',
-          '',
-          ABOUT.intro
+          { text: 'EGEMEN DER - Bilgisayar Mühendisi', type: 'output' },
+          { text: 'SOC geçmişine sahip Red Team & Offensive Security meraklısı.', type: 'output' },
+          { text: '', type: 'output' },
+          { text: ABOUT.intro, type: 'output' }
         ];
         break;
       case 'skills':
         response = [
-          'TEKNİK YETENEKLER:',
-          ...SKILL_CATEGORIES.map(cat => `  [+] ${cat.name}: ${cat.skills.join(', ')}`)
+          { text: 'TEKNİK YETENEKLER:', type: 'output' },
+          ...SKILL_CATEGORIES.map(cat => ({ text: `  [+] ${cat.name}: ${cat.skills.join(', ')}`, type: 'output' }))
         ];
         break;
       case 'experience':
         response = [
-          'İŞ GEÇMİŞİ:',
+          { text: 'İŞ GEÇMİŞİ:', type: 'output' },
           ...EXPERIENCE.flatMap(exp => [
-            `  * ${exp.company} (${exp.date})`,
-            `    Pozisyon: ${exp.role}`,
-            ...exp.bullets.map(b => `    - ${b}`),
-            ''
+            { text: `  * ${exp.company} (${exp.date})`, type: 'output' },
+            { text: `    Pozisyon: ${exp.role}`, type: 'output' },
+            ...exp.bullets.map(b => ({ text: `    - ${b}`, type: 'output' })),
+            { text: '', type: 'output' }
           ])
         ];
         break;
       case 'education':
         response = [
-          'EĞİTİM:',
-          `  Okul:           ${EDUCATION.school}`,
-          `  Bölüm:          ${EDUCATION.degree} (${EDUCATION.date})`,
-          `  Kulüp:          ${EDUCATION.activities}`,
-          `  Ana Odak:       ${EDUCATION.focus}`,
-          '  Sertifikalar:',
-          ...EDUCATION.certifications.map(cert => `    - ${cert.name} (Doğrula: ${cert.link})`)
+          { text: 'EĞİTİM:', type: 'output' },
+          { text: `  Okul:           ${EDUCATION.school}`, type: 'output' },
+          { text: `  Bölüm:          ${EDUCATION.degree} (${EDUCATION.date})`, type: 'output' },
+          { text: `  Kulüp:          ${EDUCATION.activities}`, type: 'output' },
+          { text: `  Ana Odak:       ${EDUCATION.focus}`, type: 'output' },
+          { text: '  Sertifikalar:', type: 'output' },
+          ...EDUCATION.certifications.map(cert => ({ text: `    - ${cert.name} (Doğrula: ${cert.link})`, type: 'output' }))
         ];
         break;
       case 'contact':
         response = [
-          'İLETİŞİM BİLGİLERİ:',
-          `  E-posta:     ${ABOUT.contact.email}`,
-          `  Telefon:     ${ABOUT.contact.phone}`,
-          `  Konum:       ${ABOUT.contact.location}`,
-          `  LinkedIn:    ${ABOUT.contact.linkedin}`,
-          `  Medium:      ${ABOUT.contact.medium}`,
-          `  Askerlik:    ${ABOUT.contact.military}`,
-          `  Diller:      ${ABOUT.contact.languages}`
+          { text: 'İLETİŞİM BİLGİLERİ:', type: 'output' },
+          { text: `  E-posta:     ${ABOUT.contact.email}`, type: 'output' },
+          { text: `  Telefon:     ${ABOUT.contact.phone}`, type: 'output' },
+          { text: `  Konum:       ${ABOUT.contact.location}`, type: 'output' },
+          { text: `  LinkedIn:    ${ABOUT.contact.linkedin}`, type: 'output' },
+          { text: `  Medium:      ${ABOUT.contact.medium}`, type: 'output' },
+          { text: `  Askerlik:    ${ABOUT.contact.military}`, type: 'output' },
+          { text: `  Diller:      ${ABOUT.contact.languages}`, type: 'output' }
         ];
         break;
+      case 'pwd':
+        response = [{ text: currentPath, type: 'output' }];
+        break;
+      case 'cd': {
+        const target = args[0] || '~';
+        const { node, resolvedPath } = getFsItem(target, currentPath);
+        if (!node) {
+          response = [{ text: `-bash: cd: ${target}: No such file or directory`, type: 'error' }];
+        } else if (node.restricted) {
+          response = [{ text: `-bash: cd: ${target}: Permission denied`, type: 'error' }];
+        } else if (node.type !== 'dir') {
+          response = [{ text: `-bash: cd: ${target}: Not a directory`, type: 'error' }];
+        } else {
+          setCurrentPath(resolvedPath);
+          response = [];
+        }
+        break;
+      }
+      case 'cat': {
+        if (args.length === 0) {
+          response = [{ text: 'cat: missing operand', type: 'error' }];
+        } else {
+          const fileResponse = [];
+          for (const target of args) {
+            const { node } = getFsItem(target, currentPath);
+            if (!node) {
+              fileResponse.push({ text: `cat: ${target}: No such file or directory`, type: 'error' });
+            } else if (node.restricted) {
+              fileResponse.push({ text: `cat: ${target}: Permission denied`, type: 'error' });
+            } else if (node.type === 'dir') {
+              fileResponse.push({ text: `cat: ${target}: Is a directory`, type: 'error' });
+            } else {
+              const lines = node.content.split('\n');
+              fileResponse.push(...lines.map(line => ({ text: line, type: 'output' })));
+            }
+          }
+          response = fileResponse;
+        }
+        break;
+      }
+      case 'ls': {
+        let showHidden = false;
+        let longFormat = false;
+        let targets = [];
+
+        for (const arg of args) {
+          if (arg.startsWith('-')) {
+            if (arg.includes('a')) showHidden = true;
+            if (arg.includes('l')) longFormat = true;
+          } else {
+            targets.push(arg);
+          }
+        }
+
+        const targetPath = targets[0] || '.';
+        const { node } = getFsItem(targetPath, currentPath);
+
+        if (!node) {
+          response = [{ text: `ls: cannot access '${targetPath}': No such file or directory`, type: 'error' }];
+        } else if (node.restricted) {
+          response = [{ text: `ls: cannot open directory '${targetPath}': Permission denied`, type: 'error' }];
+        } else if (node.type === 'file') {
+          if (longFormat) {
+            response = [{
+              type: 'rich',
+              elements: [
+                { text: node.permissions + ' ', className: 'text-gray-500 font-mono' },
+                { text: ` ${node.links} ${node.owner} ${node.group} `, className: 'text-gray-400 font-mono' },
+                { text: String(node.size).padStart(5) + ' ', className: 'text-yellow-500/80 font-mono' },
+                { text: node.date + ' ', className: 'text-gray-500 font-mono' },
+                { text: targetPath, className: node.permissions.includes('x') ? 'text-green-400 font-mono font-bold' : 'text-gray-200 font-mono' }
+              ]
+            }];
+          } else {
+            response = [{ text: targetPath, type: node.permissions.includes('x') ? 'exe' : 'file' }];
+          }
+        } else {
+          let items = Object.entries(node.children || {});
+          items.sort((a, b) => a[0].localeCompare(b[0]));
+
+          if (showHidden) {
+            const { node: parentNode } = getFsItem('..', targetPath === '.' ? currentPath : targetPath);
+            const dotDotNode = parentNode || node;
+            items = [
+              ['.', node],
+              ['..', dotDotNode],
+              ...items
+            ];
+          } else {
+            // Gizli dosyaları (. ile başlayan) filtrele
+            items = items.filter(([name]) => !name.startsWith('.'));
+          }
+
+          if (longFormat) {
+            response = items.map(([name, item]) => {
+              const isDir = item.type === 'dir';
+              const isExe = !isDir && item.permissions.includes('x');
+              let nameColor = 'text-gray-200';
+              if (name === 'tmp') nameColor = 'bg-[#1e4a45] text-cyan-300 font-bold px-1 rounded-sm';
+              else if (isDir) nameColor = 'text-cyan-400 font-bold';
+              else if (isExe) nameColor = 'text-emerald-400 font-bold';
+
+              return {
+                type: 'rich',
+                elements: [
+                  { text: item.permissions + ' ', className: 'text-gray-500 font-mono' },
+                  { text: ` ${String(item.links).padStart(2)} ${item.owner.padEnd(5)} ${item.group.padEnd(5)} `, className: 'text-gray-400 font-mono' },
+                  { text: String(item.size).padStart(5) + ' ', className: 'text-yellow-500/80 font-mono' },
+                  { text: item.date + ' ', className: 'text-gray-500 font-mono' },
+                  { text: name + (isDir ? '/' : ''), className: `${nameColor} font-mono` }
+                ]
+              };
+            });
+          } else {
+            const elements = [];
+            items.forEach(([name, item], idx) => {
+              const isDir = item.type === 'dir';
+              const isExe = !isDir && item.permissions.includes('x');
+              let nameColor = 'text-gray-200';
+              if (name === 'tmp') nameColor = 'bg-[#1e4a45] text-cyan-300 font-bold px-1 rounded-sm';
+              else if (isDir) nameColor = 'text-cyan-400 font-bold';
+              else if (isExe) nameColor = 'text-emerald-400 font-bold';
+
+              elements.push({
+                text: name + (isDir ? '/' : ''),
+                className: `${nameColor} font-mono hover:underline`
+              });
+              
+              if (idx < items.length - 1) {
+                elements.push({ text: '   ', className: 'text-gray-400 font-mono' });
+              }
+            });
+            response = [{ type: 'rich', elements }];
+          }
+        }
+        break;
+      }
       case 'clear':
         setTerminalHistory([]);
         setTerminalInput('');
         return;
       default:
-        response = [`Komut bulunamadı: "${cmd}". Komut listesi için "help" yazın.`];
+        response = [{ text: `Komut bulunamadı: "${baseCmd}". Komut listesi için "help" yazın.`, type: 'error' }];
     }
 
+    const displayPath = currentPath === HOME_DIR ? '~' : (currentPath.startsWith(HOME_DIR + '/') ? '~' + currentPath.slice(HOME_DIR.length) : currentPath);
     setTerminalHistory(prev => [
       ...prev,
-      { text: `guest@egemender:~$ ${terminalInput}`, type: 'input' },
-      ...response.map(line => ({ text: line, type: 'output' })),
+      { type: 'kali-prompt', path: displayPath, command: terminalInput },
+      ...response,
       { text: '', type: 'system' }
     ]);
     setTerminalInput('');
+  };
+
+  // Tab ile otomatik tamamlama
+  const AVAILABLE_COMMANDS = ['help', 'about', 'skills', 'experience', 'education', 'contact', 'ls', 'cd', 'cat', 'pwd', 'clear'];
+
+  const handleTabComplete = (e) => {
+    if (e.key !== 'Tab') return;
+    e.preventDefault();
+
+    const input = terminalInput;
+    // Eğer hiçbir şey yazılmamışsa otomatik tamamlama yapma
+    if (!input || !input.trim()) return;
+
+    const parts = input.split(/\s+/);
+    const isFirstWord = parts.length <= 1;
+    const partial = parts[parts.length - 1] || '';
+
+    if (isFirstWord) {
+      // Komut tamamlama
+      const matches = AVAILABLE_COMMANDS.filter(cmd => cmd.startsWith(partial.toLowerCase()));
+      if (matches.length === 1) {
+        setTerminalInput(matches[0] + ' ');
+      } else if (matches.length > 1) {
+        // Ortak prefix'i bul
+        let commonPrefix = matches[0];
+        for (const m of matches) {
+          while (!m.startsWith(commonPrefix)) {
+            commonPrefix = commonPrefix.slice(0, -1);
+          }
+        }
+        if (commonPrefix.length > partial.length) {
+          setTerminalInput(commonPrefix);
+        } else {
+          // Eşleşmeleri terminalde göster
+          const displayPath = currentPath === HOME_DIR ? '~' : (currentPath.startsWith(HOME_DIR + '/') ? '~' + currentPath.slice(HOME_DIR.length) : currentPath);
+          setTerminalHistory(prev => [
+            ...prev,
+            { type: 'kali-prompt', path: displayPath, command: input },
+            { type: 'rich', elements: matches.map((m, i) => ({
+              text: m + (i < matches.length - 1 ? '   ' : ''),
+              className: 'text-cyan-400 font-mono'
+            }))}
+          ]);
+        }
+      }
+    } else {
+      // Dosya/dizin yolu tamamlama
+      const prefix = parts.slice(0, -1).join(' ') + ' ';
+      let dirPath = '.';
+      let filePartial = partial;
+
+      // Eğer partial içinde / varsa, dizin ve dosya kısımlarını ayır
+      const lastSlash = partial.lastIndexOf('/');
+      if (lastSlash !== -1) {
+        dirPath = partial.slice(0, lastSlash) || '/';
+        filePartial = partial.slice(lastSlash + 1);
+      }
+
+      const { node } = getFsItem(dirPath, currentPath);
+      if (!node || node.type !== 'dir' || !node.children) return;
+
+      const candidates = Object.entries(node.children)
+        .filter(([name]) => name.toLowerCase().startsWith(filePartial.toLowerCase()))
+        .filter(([name]) => !name.startsWith('.') || filePartial.startsWith('.'));
+
+      if (candidates.length === 0) return;
+
+      const buildCompletion = (name, item) => {
+        const pathPrefix = lastSlash !== -1 ? partial.slice(0, lastSlash + 1) : '';
+        return pathPrefix + name + (item.type === 'dir' ? '/' : '');
+      };
+
+      if (candidates.length === 1) {
+        const [name, item] = candidates[0];
+        const completed = buildCompletion(name, item);
+        setTerminalInput(prefix + completed + (item.type === 'file' ? ' ' : ''));
+      } else {
+        // Ortak prefix'i bul (büyük/küçük harf duyarsız)
+        let commonName = candidates[0][0];
+        for (const [name] of candidates) {
+          while (commonName.length > 0 && !name.toLowerCase().startsWith(commonName.toLowerCase())) {
+            commonName = commonName.slice(0, -1);
+          }
+        }
+        if (commonName.length > filePartial.length) {
+          const pathPrefix = lastSlash !== -1 ? partial.slice(0, lastSlash + 1) : '';
+          setTerminalInput(prefix + pathPrefix + commonName);
+        } else {
+          // Eşleşmeleri terminalde göster
+          const displayPath = currentPath === HOME_DIR ? '~' : (currentPath.startsWith(HOME_DIR + '/') ? '~' + currentPath.slice(HOME_DIR.length) : currentPath);
+          setTerminalHistory(prev => [
+            ...prev,
+            { type: 'kali-prompt', path: displayPath, command: input },
+            { type: 'rich', elements: candidates.map(([name, item], i) => ({
+              text: name + (item.type === 'dir' ? '/' : '') + (i < candidates.length - 1 ? '   ' : ''),
+              className: item.type === 'dir' ? 'text-cyan-400 font-bold font-mono' : 'text-gray-200 font-mono'
+            }))}
+          ]);
+        }
+      }
+    }
   };
 
   return (
@@ -446,39 +1396,94 @@ export default function App() {
                 <span className="w-3 h-3 rounded-full bg-yellow-500/70 block"></span>
                 <span className="w-3 h-3 rounded-full bg-[#00ff66]/70 block"></span>
               </div>
-              <span className="text-xs font-mono text-gray-500 select-none">bash - egemen@redteam</span>
+              <span className="text-xs font-mono text-gray-500 select-none">bash - guest@egemen</span>
             </div>
 
             {/* Terminal Body */}
             <div ref={terminalBodyRef} className="p-3 sm:p-4 h-[280px] sm:h-[380px] lg:h-[450px] overflow-y-auto font-mono text-xs space-y-2 flex flex-col text-left">
               <div className="flex-1">
                 {terminalHistory.map((line, index) => {
+                  if (line.type === 'kali-prompt') {
+                    return (
+                      <div key={index} className="space-y-0.5 my-1 text-left font-mono text-xs">
+                        <div className="flex items-center">
+                          <span className="text-[#00ff66]">┌──(</span>
+                          <span className="text-red-500 font-bold">guest</span>
+                          <span className="text-red-500 mx-0.5">💀</span>
+                          <span className="text-red-500 font-bold">egemen</span>
+                          <span className="text-[#00ff66]">)-[</span>
+                          <span className="text-white font-bold">{line.path}</span>
+                          <span className="text-[#00ff66]">]</span>
+                        </div>
+                        <div className="flex items-center">
+                          <span className="text-[#00ff66]">└─</span>
+                          <span className="text-red-500 font-bold mr-2">$</span>
+                          <span className="text-white font-bold">{line.command}</span>
+                        </div>
+                      </div>
+                    );
+                  }
+
+                  if (line.type === 'rich') {
+                    return (
+                      <div key={index} className="whitespace-pre-wrap leading-relaxed">
+                        {line.elements.map((el, elIdx) => (
+                          <span key={elIdx} className={el.className}>
+                            {el.text}
+                          </span>
+                        ))}
+                      </div>
+                    );
+                  }
+
                   let colorClass = 'text-[#00ff66]'; // varsayılan neon yeşil
                   if (line.type === 'input') {
-                    colorClass = 'text-white font-bold'; // kullanıcının kendi yazdığı
+                    colorClass = 'text-white font-bold';
                   } else if (line.type === 'system') {
-                    colorClass = 'text-gray-400'; // sistem logları/boşluklar
+                    colorClass = 'text-gray-400';
+                  } else if (line.type === 'error') {
+                    colorClass = 'text-red-400';
+                  } else if (line.type === 'output') {
+                    colorClass = 'text-gray-300';
+                  } else if (line.type === 'exe') {
+                    colorClass = 'text-[#00ff66] font-bold';
+                  } else if (line.type === 'file') {
+                    colorClass = 'text-gray-200';
                   }
+
                   return (
                     <div key={index} className={`whitespace-pre-wrap leading-relaxed ${colorClass}`}>
-                      {line.text}
+                      {renderTerminalText(line.text)}
                     </div>
                   );
                 })}
               </div>
               
               {/* Terminal Input Form */}
-              <form onSubmit={handleCommand} className="flex items-center pt-2 border-t border-gray-900/50 text-left">
-                <span className="text-[#00ff66] mr-2 select-none">guest@egemen:~$</span>
-                <input
-                  type="text"
-                  value={terminalInput}
-                  onChange={(e) => setTerminalInput(e.target.value)}
-                  className="flex-1 bg-transparent border-none outline-none text-white font-mono p-0 focus:ring-0 text-left"
-                  autoFocus
-                  placeholder="help yazın..."
-                />
-              </form>
+              <div className="pt-2 border-t border-gray-900/50 text-left font-mono text-xs space-y-0.5">
+                <div className="flex items-center">
+                  <span className="text-[#00ff66]">┌──(</span>
+                  <span className="text-red-500 font-bold">guest</span>
+                  <span className="text-red-500 mx-0.5">💀</span>
+                  <span className="text-red-500 font-bold">egemen</span>
+                  <span className="text-[#00ff66]">)-[</span>
+                  <span className="text-white font-bold">{currentPath === HOME_DIR ? '~' : (currentPath.startsWith(HOME_DIR + '/') ? '~' + currentPath.slice(HOME_DIR.length) : currentPath)}</span>
+                  <span className="text-[#00ff66]">]</span>
+                </div>
+                <form onSubmit={handleCommand} className="flex items-center text-left">
+                  <span className="text-[#00ff66] select-none">└─</span>
+                  <span className="text-red-500 font-bold mr-2 select-none">$</span>
+                  <input
+                    type="text"
+                    value={terminalInput}
+                    onChange={(e) => setTerminalInput(e.target.value)}
+                    onKeyDown={handleTabComplete}
+                    className="flex-1 bg-transparent border-none outline-none text-white font-mono p-0 focus:ring-0 text-left font-bold"
+                    autoFocus
+                    placeholder="help..."
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>
