@@ -127,7 +127,7 @@ export default function FeedbackSection() {
         <span className="h-px w-12 bg-gradient-to-l from-transparent to-[#00ff66]/50"></span>
       </div>
 
-      <h2 className="text-2xl sm:text-3xl font-bold text-center text-white mb-2 font-mono tracking-tight">
+      <h2 className="text-2xl sm:text-3xl font-bold text-center mb-2 font-mono tracking-tight" style={{ color: '#ffffff' }}>
         Geri Bildirim & Değerlendirme
       </h2>
       <p className="text-center text-gray-400 font-mono mt-3">

@@ -1185,7 +1185,7 @@ export default function App() {
       <header className="border-b border-gray-900 bg-[#0f0f0f]/85 backdrop-blur sticky top-0 z-50 px-4 sm:px-6 py-3 sm:py-4 flex flex-col items-center gap-2 sm:gap-2.5 overflow-hidden relative">
         <CyberAttackBg />
         <div className="relative z-10 flex items-center space-x-2 w-full justify-center">
-          <h1 className="font-mono font-bold text-base sm:text-xl tracking-wider text-white">EGEMEN DER PORTFOLYO</h1>
+          <h1 className="font-mono font-bold text-base sm:text-xl tracking-wider" style={{ color: '#ffffff' }}>EGEMEN DER PORTFOLYO</h1>
         </div>
         <nav className="relative z-10 flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1.5 sm:gap-y-2 font-mono text-[11px] sm:text-sm w-full">
           <a href="#about" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Hakkımda</a>
@@ -1216,8 +1216,8 @@ export default function App() {
               </div>
               
               <div className="flex-1 text-center md:text-left space-y-2">
-                <h2 className="text-2xl font-bold text-white tracking-wide">{ABOUT.name}</h2>
-                <p className="text-sm font-mono text-[#00ff66]">{ABOUT.title}</p>
+                <h2 className="text-2xl font-bold tracking-wide" style={{ color: '#ffffff' }}>{ABOUT.name}</h2>
+                <p className="text-sm font-mono" style={{ color: '#00ff66' }}>{ABOUT.title}</p>
                 <p className="text-sm leading-relaxed text-gray-400 mt-3">{ABOUT.intro}</p>
               </div>
             </div>
@@ -1257,7 +1257,7 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {SKILL_CATEGORIES.map((cat, idx) => (
                 <div key={idx} className="bg-[#0f0f0f]/40 border border-gray-900 rounded p-4 space-y-3">
-                  <h3 className="text-xs font-mono font-bold text-white uppercase tracking-wider">{cat.name}</h3>
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider" style={{ color: '#ffffff' }}>{cat.name}</h3>
                   <div className="flex flex-wrap gap-1.5">
                     {cat.skills.map((skill, index) => (
                       <span key={index} className="bg-[#0f0f0f] border border-gray-800 text-gray-400 font-mono text-[11px] px-2.5 py-1 rounded hover:border-[#00ff66]/60 transition">
@@ -1278,7 +1278,7 @@ export default function App() {
                 <div key={index} className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-4 hover:border-gray-800 transition">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                     <div>
-                      <h3 className="text-white font-bold text-base">{exp.company}</h3>
+                      <h3 className="font-bold text-base" style={{ color: '#ffffff' }}>{exp.company}</h3>
                       <p className="text-sm text-[#00ff66] font-mono mt-0.5">{exp.role}</p>
                     </div>
                     <span className="text-xs font-mono bg-gray-950 text-gray-400 px-2.5 py-1 rounded border border-gray-800 self-start">{exp.date}</span>
@@ -1304,7 +1304,7 @@ export default function App() {
             <div className="space-y-4">
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
                 <div>
-                  <h3 className="text-white font-bold text-base">{EDUCATION.school}</h3>
+                  <h3 className="font-bold text-base" style={{ color: '#ffffff' }}>{EDUCATION.school}</h3>
                   <p className="text-sm text-gray-400 font-mono mt-0.5">{EDUCATION.degree}</p>
                   <p className="text-xs text-gray-500 font-mono mt-1">🎯 Odak: {EDUCATION.focus}</p>
                   <p className="text-xs text-gray-500 font-mono mt-0.5">👥 {EDUCATION.activities}</p>
@@ -1315,7 +1315,7 @@ export default function App() {
 
               {/* Sertifikalar Grid */}
               <div className="pt-4 border-t border-gray-950 space-y-2">
-                <h4 className="text-xs font-mono font-bold text-white uppercase tracking-wider">Sertifikalar:</h4>
+                <h4 className="text-xs font-mono font-bold uppercase tracking-wider" style={{ color: '#ffffff' }}>Sertifikalar:</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-gray-400">
                   {EDUCATION.certifications.map((cert, idx) => (
                     <a key={idx} href={cert.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between bg-gray-955 border border-gray-900 px-3 py-2 rounded hover:border-[#00ff66]/30 transition group text-gray-400">
@@ -1375,7 +1375,7 @@ export default function App() {
               {REFERENCES.map((ref, idx) => (
                 <div key={idx} className="bg-[#0f0f0f] border border-gray-900 rounded-lg p-5 space-y-3">
                   <div>
-                    <h3 className="text-white font-bold">{ref.name}</h3>
+                    <h3 className="font-bold" style={{ color: '#ffffff' }}>{ref.name}</h3>
                     <p className="text-xs text-gray-500 font-mono">{ref.company} / {ref.role}</p>
                   </div>
                   <div className="space-y-1 text-xs font-mono text-gray-400 pt-2 border-t border-gray-955">
