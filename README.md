@@ -1,10 +1,10 @@
 # 🛡️ Egemen Der — Siber Güvenlik & Red Team Portfolyosu
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-00ff66?style=for-the-badge&logo=github)](https://anogar-dxilak.github.io/Sitem/)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-Realtime%20DB-FFCA28?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-00ff66?style=flat-square)](https://anogar-dxilak.github.io/Sitem/)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?style=flat-square)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat-square)](https://tailwindcss.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-Realtime_DB-FFCA28?style=flat-square)](https://firebase.google.com/)
 
 Bilgisayar Mühendisi ve Siber Güvenlik & Red Team Uzmanı **Egemen Der** için özel olarak tasarlanmış; interaktif Kali Linux terminali, siber saldırı haritası animasyonu, projeler, sertifikalar ve Firebase tabanlı geri bildirim modülü içeren modern web portfolyosu.
 
