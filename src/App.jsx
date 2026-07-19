@@ -1188,13 +1188,13 @@ export default function App() {
           <h1 className="font-mono font-bold text-base sm:text-xl tracking-wider text-white">EGEMEN DER PORTFOLYO</h1>
         </div>
         <nav className="relative z-10 flex flex-wrap justify-center gap-x-3 sm:gap-x-6 gap-y-1.5 sm:gap-y-2 font-mono text-[11px] sm:text-sm w-full">
-          <a href="#about" className="text-gray-300 hover:text-[#00ff66] transition">Hakkımda</a>
-          <a href="#skills" className="text-gray-300 hover:text-[#00ff66] transition">Yetenekler</a>
-          <a href="#experience" className="text-gray-300 hover:text-[#00ff66] transition">Deneyim</a>
-          <a href="#education" className="text-gray-300 hover:text-[#00ff66] transition">Eğitim</a>
-          <a href="#projects" className="text-gray-300 hover:text-[#00ff66] transition">Projeler</a>
-          <a href="#references" className="text-gray-300">Referanslar</a>
-          <a href="#feedback" className="text-gray-300 hover:text-[#00ff66] transition">Geri Bildirim</a>
+          <a href="#about" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Hakkımda</a>
+          <a href="#skills" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Yetenekler</a>
+          <a href="#experience" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Deneyim</a>
+          <a href="#education" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Eğitim</a>
+          <a href="#projects" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Projeler</a>
+          <a href="#references" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Referanslar</a>
+          <a href="#feedback" className="text-gray-300 hover:text-[#00ff66] underline underline-offset-4 decoration-gray-700/80 hover:decoration-[#00ff66] transition">Geri Bildirim</a>
         </nav>
       </header>
 
