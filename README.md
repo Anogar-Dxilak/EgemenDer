@@ -1,14 +1,10 @@
 # 🛡️ Egemen Der — Siber Güvenlik & Red Team Portfolyosu
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-00ff66?style=flat-square)](https://anogar-dxilak.github.io/Sitem/)
-[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=flat-square)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.1-646CFF?style=flat-square)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=flat-square)](https://tailwindcss.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-Realtime_DB-FFCA28?style=flat-square)](https://firebase.google.com/)
+> **[🌐 CANLI SİTEYİ ZİYARET EDİN (GitHub Pages)](https://anogar-dxilak.github.io/Sitem/)**
+> 
+> `React 19` &nbsp;|&nbsp; `Vite 8` &nbsp;|&nbsp; `Tailwind CSS 4` &nbsp;|&nbsp; `Firebase Realtime DB` &nbsp;|&nbsp; `FormSubmit API`
 
 Bilgisayar Mühendisi ve Siber Güvenlik & Red Team Uzmanı **Egemen Der** için özel olarak tasarlanmış; interaktif Kali Linux terminali, siber saldırı haritası animasyonu, projeler, sertifikalar ve Firebase tabanlı geri bildirim modülü içeren modern web portfolyosu.
-
-🌐 **Canlı Siteyi Ziyaret Edin:** [https://anogar-dxilak.github.io/Sitem/](https://anogar-dxilak.github.io/Sitem/)
 
 ---
 
